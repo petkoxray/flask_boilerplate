@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_bootstrap import Bootstrap
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
@@ -15,7 +16,7 @@ login_manager = LoginManager()
 login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'info'
 mail = Mail()
-
+bootstrap = Bootstrap()
 
 def create_app(config_class=Config):
     app = Flask(__name__)
@@ -27,6 +28,7 @@ def create_app(config_class=Config):
     bcrypt.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)
+    bootstrap.init_app(app)
 
     from boilerplate.users.routes import users
     from boilerplate.pages.routes import pages
